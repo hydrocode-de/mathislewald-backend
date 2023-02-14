@@ -2,6 +2,7 @@ version: '3'
 services:
   geoserver:
     image: docker.osgeo.org/geoserver:2.22.0
+#    user: "${UID}:${GID}"
     ports:
       - 8080:8080
     environment:
@@ -12,7 +13,6 @@ services:
       - CORS_ENABLED=true
       - CORS_ALLOWED_METHODS=GET,POST,PUT,HEAD,OPTIONS
     volumes:
-      # -v /home/geouser/geodata:/opt/geoserver_data
       - ./geodata:/opt/geoserver_data/
   
   upload:
@@ -22,6 +22,10 @@ services:
       - 127.0.0.1:8501:8501
     volumes:
       - ./geodata/data/public:/src/data
-      - ./www/img:/src/img
+      - ./www/:/src/www
+    environment:
+      - DATADIR=/src/data
+      - WWWDIR=/src/www
+      - IMGDIR=/src/www/img
     #  "--server.headless", "true", "--server.fileWatcherType", "none", "--browser.gatherUsageStats", "false"
     command: streamlit run app/upload.py --server.maxUploadSize=2000 --server.baseUrlPath=/upload --server.headless true --server.fileWatcherType none --browser.gatherUsageStats false 
