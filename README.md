@@ -18,7 +18,10 @@ id <USER> -u  # get UID
 id <USER> -g  # get GID
 ```
 
-Then set these as `GID` and `UID` environment variables. The better approach is to add a `.env` file to the repo: 
+Then set these as `GID` and `UID` environment variables. 
+
+
+The better approach is to add a `.env` file to the repo: 
 
 ```bash
 echo "UID=$(id -u)\nGID=$(id -g)" > .env
