@@ -1,0 +1,27 @@
+version: '3'
+services:
+  geoserver:
+    image: docker.osgeo.org/geoserver:2.22.0
+    ports:
+      - 8080:8080
+    environment:
+#      - INSTALL_EXTENSIONS=true
+#      - STABLE_EXTENSIONS=wps,csw
+      - EXTRA_JAVA_OPTS=-Xms1G -Xmx2G
+      - SKIP_DEMO_DATA=true
+      - CORS_ENABLED=true
+      - CORS_ALLOWED_METHODS=GET,POST,PUT,HEAD,OPTIONS
+    volumes:
+      # -v /home/geouser/geodata:/opt/geoserver_data
+      - ./geodata:/opt/geoserver_data/
+  
+  upload:
+    image: ghcr.io/hydrocode-de/mathislewald-upload:v0.7.0
+    user: "${UID}:${GID}"
+    ports:
+      - 127.0.0.1:8501:8501
+    volumes:
+      - ./geodata/data/public:/src/data
+      - ./www/img:/src/img
+    #  "--server.headless", "true", "--server.fileWatcherType", "none", "--browser.gatherUsageStats", "false"
+    command: streamlit run app/upload.py --server.maxUploadSize=2000 --server.baseUrlPath=/upload --server.headless true --server.fileWatcherType none --browser.gatherUsageStats false 
