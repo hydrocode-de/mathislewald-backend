@@ -21,10 +21,10 @@ id <USER> -g  # get GID
 Then set these as `GID` and `UID` environment variables. 
 
 
-The better approach is to add a `.env` file to the repo: 
+The better approach is to add a `.env` file to the repo. Additionally, you can set the `RESTART=no` to prevent a local deployment from restarting on each host system boot: 
 
 ```bash
-echo "UID=$(id -u)\nGID=$(id -g)" > .env
+echo "UID=$(id -u)\nGID=$(id -g)\nRESTART=no" > .env
 ```
 
 Finally you can run the whole infrastructure:
