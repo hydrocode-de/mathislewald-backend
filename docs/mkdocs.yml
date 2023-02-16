@@ -16,6 +16,7 @@ theme:
 
   nav:
     - Home: index.md
+    - Install: install.md
   
   markdown_extensions:
   - pymdownx.superfences:
