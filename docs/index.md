@@ -12,3 +12,4 @@ The current state of the application involves several parts:
 ## Contents
 
 * [Install guide](./install.md)
+* [Configure](./configure.md)
