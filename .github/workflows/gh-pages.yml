@@ -1,0 +1,35 @@
+name: Build docs
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  documentation:
+    name: Build and deploy specs to GH pages
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout and use lfs
+        uses: actions/checkout@v2
+        
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.9
+          
+      - name: Install dependencies
+        run: pip install mkdocs mkdocs-material
+        
+      - name: Build the documentation
+        run: | 
+          cd docs
+          mkdocs build
+        
+      - name: Upload to Github pages
+        uses: crazy-max/ghaction-github-pages@v1
+        with:
+          target_branch: gh-pages
+          build_dir: docs/site
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
