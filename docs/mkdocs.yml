@@ -1,0 +1,31 @@
+site_name: Mathislewald App Backend
+site_url: https://hydrocode-de.github.io/mathislewald-backend
+repo_url: https://github.com/hydrocode-de/mathislewald-backend
+repo_name: hydrocode-de/mathislewald-backend
+
+theme:
+  name: material
+  features:
+    - content.action.view
+    - content.action.edit
+    - navigation.tabs
+  
+  icon:
+    - edit: material/pencil
+    - view: material/eye
+
+  nav:
+    - Home: index.md
+  
+  markdown_extensions:
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - attr_list
+  - tables
+  - pymdownx.emoji:
+      emoji_index: !!python/name:materialx.emoji.twemoji
+      emoji_generator: !!python/name:materialx.emoji.to_svg
+          
