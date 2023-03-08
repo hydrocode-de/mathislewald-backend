@@ -30,4 +30,4 @@ services:
       - IMGDIR=/src/www/img
     restart: ${RESTART}
     #  "--server.headless", "true", "--server.fileWatcherType", "none", "--browser.gatherUsageStats", "false"
-    command: streamlit run app/upload.py --server.maxUploadSize=2000 --server.baseUrlPath=/upload --server.headless true --server.fileWatcherType none --browser.gatherUsageStats false 
+    command: streamlit run upload.py --server.maxUploadSize=2000 --server.baseUrlPath=/upload --server.headless true --server.fileWatcherType none --browser.gatherUsageStats false 
